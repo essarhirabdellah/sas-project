@@ -310,6 +310,25 @@ function searsh_on_tiket(list_of_tikets,data) {
             }
     }
 }
+// filter the tripse
+
+function filter_trip(data) {
+    // ask about departur
+    let departur = prompt("what is the departur:")
+      //loop on  the trips
+    for (let i = 0; i < data.length; i++) {
+          //making sure of the departur of the trip
+               if (data[i].departure == departur) {
+                            // show the trip info
+                            for(const [key,value] of Object.entries(data[i])){
+                              console.log(`${key} : ${value}`)
+                                
+                            }
+                        }
+                        
+                    }
+
+}
 
 // function main
 function main(){
@@ -339,7 +358,7 @@ function main(){
                 break;
         
             case "6":
-                
+                filter_trip(trips)
                 break;
             case "7":
                 
