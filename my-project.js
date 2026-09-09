@@ -205,7 +205,6 @@ function manu() {
         console.log("0. log out")
 }
 
-
 //log all the data
 function log_all(data) {
     for(let i = 0; i < data.length ; i++){
@@ -225,7 +224,7 @@ function buy(data) {
      if (id_trep <= 0 ) {
         console.log("this id does not exset")
      }
-     else if (id_trep < data.length) {
+     else if (id_trep <= data.length) {
         // add the id of the terp
         person.id = id_trep
         // take the name
@@ -257,7 +256,7 @@ function buy(data) {
 function show_tiket(list_tikets) {
        for(let i = 0; i < list_tikets.length ; i++){
         console.log("\n")
-        for(const [key,value] of Object.entries(tikets[i])){
+        for(const [key,value] of Object.entries(list_tikets[i])){
             console.log(`${key} : ${value}`)
         }
     }
@@ -272,28 +271,24 @@ function cancel_tiket(list_tikets,data) {
     for(let i = 0;i < list_tikets.length;i++){
         // make sure of id
             if (list_tikets[i].idtrep == id) {
-                // conform the name
-                // if (list_tikets[i].name == name) {
-                    // delet the object
-                    list_tikets.splice(i,1)
-                    // // making sure if it is work
-                    // console.log(list_tikets)
-                    for (let j = 0; j < data.length; j++) {
+                   let mol = list_tikets[i].id
+                   for (let j = 0; j < data.length; j++) {
                      //making sure of the departur of the trip
-                            if (data[j].id == list_tikets[i].id) {
+                            if (data[j].id == mol) {
                               //udate sites
-                            let y = data[j].availableSeats + 1
-                            data[i].availableSeats = y
+                              let y = data[j].availableSeats + 1
+                              data[j].availableSeats = y
                      
                         }
-                        
-                    }
+                    // delet the object
+                    list_tikets.splice(i,1)
             }
             // if the id does not found
             // else{
             //     console.log("this id does not exsit")
             // }
     }
+}
 }
 // searsh on tiket 
 function searsh_on_tiket(list_of_tikets,data) {
@@ -327,9 +322,9 @@ function searsh_on_tiket(list_of_tikets,data) {
                 }
             }
             // if the id does not found
-            else{
-                console.log("this id does not exsit")
-            }
+            // else{
+            //     console.log("this id does not exsit")
+            // }
     }
 }
 // filter the tripse
@@ -404,10 +399,10 @@ function sort_trips(data) {
 function main(){
         // value for out from the app
        let x
-        // print the manu
-       manu()
-           //do loop true
+     //do loop true
        do{
+        // print the manu
+         manu()
         // ask guest to choose a task
          let choose = prompt("choose what task you want:")
          switch (choose) {
@@ -446,4 +441,3 @@ function main(){
     }while (x != 0) 
 }
 main()
-// finshing the project
