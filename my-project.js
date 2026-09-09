@@ -186,6 +186,7 @@ const trips = [
     }
 ];
 let tikets = [];
+let id_person = 0;
 
 
 // all funtions
@@ -231,12 +232,26 @@ function buy(data) {
         let name_of_user = prompt("name :")
         // add the name
         person.name = name_of_user
+        //person id trip
+        person.idtrep = id_person
+        id_person++
         // add it to takites list
         tikets.push(person)
+        for (let j = 0; j < data.length; j++) {
+        //making sure of the departur of the trip
+             if (data[j].id == id_trep) {
+                              //udate sites
+                            let y = data[j].availableSeats - 1
+                            data[j].availableSeats = y
+                     
+                        }         
+                        
         // making sure is it work
         // console.log(tiktes)
     }
-}
+
+     }
+    }
 // show tiket
 
 function show_tiket(list_tikets) {
@@ -248,30 +263,36 @@ function show_tiket(list_tikets) {
     }
 }
 // cancel tiket
-function cancel_tiket(list_tikets) {
-    // ask for name
-    let name = prompt("name of the castmer:")
-    // ask for id of the tiket
+function cancel_tiket(list_tikets,data) {
+    // // ask for name
+    // let name = prompt("name of the castmer:")
+    // // ask for id of the tiket
     let id = Number(prompt("id of the tiket :"))
     // loop of all tiket we have
     for(let i = 0;i < list_tikets.length;i++){
         // make sure of id
-            if (list_tikets[i].id == id) {
+            if (list_tikets[i].idtrep == id) {
                 // conform the name
-                if (list_tikets[i].name == name) {
+                // if (list_tikets[i].name == name) {
                     // delet the object
                     list_tikets.splice(i,1)
                     // // making sure if it is work
                     // console.log(list_tikets)
-                }
-                else{
-                    console.log(`no tiket with this name ${name}`)
-                }
+                    for (let j = 0; j < data.length; j++) {
+                     //making sure of the departur of the trip
+                            if (data[j].id == list_tikets[i].id) {
+                              //udate sites
+                            let y = data[j].availableSeats - 1
+                            data[i].availableSeats = y
+                     
+                        }
+                        
+                    }
             }
             // if the id does not found
-            else{
-                console.log("this id does not exsit")
-            }
+            // else{
+            //     console.log("this id does not exsit")
+            // }
     }
 }
 // searsh on tiket 
@@ -382,7 +403,7 @@ function sort_trips(data) {
 // function main
 function main(){
         // value for out from the app
-        let x
+       let x
         // print the manu
        manu()
            //do loop true
@@ -402,7 +423,7 @@ function main(){
                 show_tiket(tikets)
                 break;
             case "4":
-                cancel_tiket(tikets)
+                cancel_tiket(tikets,trips)
                 break;
             case "5":
                 searsh_on_tiket(tikets,trips)
