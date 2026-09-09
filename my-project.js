@@ -185,7 +185,7 @@ const trips = [
         availableSeats: 50
     }
 ];
-let tiktes = [];
+let tikets = [];
 
 
 // all funtions
@@ -231,9 +231,46 @@ function buy(data) {
         // add the name
         person.name = name_of_user
         // add it to takites list
-        tiktes.push(person)
+        tikets.push(person)
         // making sure is it work
         // console.log(tiktes)
+    }
+}
+// show tiket
+
+function show_tiket(list_tikets) {
+       for(let i = 0; i < list_tikets.length ; i++){
+        console.log("\n")
+        for(const [key,value] of Object.entries(tikets[i])){
+            console.log(`${key} : ${value}`)
+        }
+    }
+}
+// cancel tiket
+function cancel_tiket(list_tikets) {
+    // ask for name
+    let name = prompt("name of the castmer:")
+    // ask for id of the tiket
+    let id = Number(prompt("id of the tiket :"))
+    // loop of all tiket we have
+    for(let i = 0;i < list_tikets.length;i++){
+        // make sure of id
+            if (list_tikets[i].id == id) {
+                // conform the name
+                if (list_tikets[i].name == name) {
+                    // delet the object
+                    list_tikets.splice(i,1)
+                    // // making sure if it is work
+                    // console.log(list_tikets)
+                }
+                else{
+                    console.log(`no tiket with this name ${name}`)
+                }
+            }
+            // if the id does not found
+            else{
+                console.log("this id does not exsit")
+            }
     }
 }
 
@@ -255,10 +292,10 @@ function main(){
                 buy(trips)
                 break;
             case "3":
-                
+                show_tiket(tikets)
                 break;
             case "4":
-                
+                cancel_tiket(tikets)
                 break;
             case "5":
                 
