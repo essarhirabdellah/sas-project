@@ -440,6 +440,7 @@ function main(){
                 break;
         
             default:
+                console.log("you have only tasks between 1 ~ 7")
                 break;
         }
     }while (x != 0) 
