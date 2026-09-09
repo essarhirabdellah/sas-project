@@ -273,6 +273,43 @@ function cancel_tiket(list_tikets) {
             }
     }
 }
+// searsh on tiket 
+function searsh_on_tiket(list_of_tikets,data) {
+     // ask for name
+    let name = prompt("tiket's person name :")
+    // ask for id of the tiket
+    let id = Number(prompt("id of the tiket :"))
+        // loop of all tiket we have
+    for(let i = 0;i < list_of_tikets.length;i++){
+        // make sure of id
+            if (list_of_tikets[i].id == id) {
+                // conform the name
+                if (list_of_tikets[i].name == name) {
+                    // delet the object
+                    console.log("this tekit exest the travel is")
+                    //loop on  the trips
+                    for (let i = 0; i < data.length; i++) {
+                        //making sure of the id of the trip
+                        if (data[i].id == id) {
+                            // show the trip info
+                            for(const [key,value] of Object.entries(data[i])){
+                              console.log(`${key} : ${value}`)
+                                
+                            }
+                        }
+                        
+                    }
+                }
+                else{
+                    console.log(`no tiket with this name ${name}`)
+                }
+            }
+            // if the id does not found
+            else{
+                console.log("this id does not exsit")
+            }
+    }
+}
 
 // function main
 function main(){
@@ -298,7 +335,7 @@ function main(){
                 cancel_tiket(tikets)
                 break;
             case "5":
-                
+                searsh_on_tiket(tikets,trips)
                 break;
         
             case "6":
