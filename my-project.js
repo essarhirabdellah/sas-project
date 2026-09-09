@@ -328,8 +328,56 @@ function filter_trip(data) {
                         
                     }
 
-}
 
+
+}
+// sort all trips
+function sort_trips(data) {
+    // list of all prices
+    let prices = []
+    // loop on prisces
+    for (let i = 0; i < data.length; i++) {
+        // add ech price
+      prices.push(data[i].price)
+                        
+    }
+    // make sure of all the prices stroge in value
+    // console.log(prices)
+    for (let i = 0; i < prices.length; i++) {
+        for (let j = 0; j < prices.length - i - 1; j++) {
+            if (prices[j] > prices[j + 1]) {
+                let swap = prices[j]
+                prices[j] = prices[j + 1]
+                prices[j + 1] = swap
+            }
+            
+        }
+        
+    }
+
+    // making sure of the prices are sorted
+    //    console.log(prices)
+
+// loop on prices
+    for(let j = 0 ; j < prices.length;j++)
+       //loop on  the trips
+      for (let i = 0; i < data.length; i++) {
+          //making sure of the departur of the trip
+               if (data[i].price == prices[j]) {
+                            // show the trip info
+                            for(const [key,value] of Object.entries(data[i])){
+                              console.log(`${key} : ${value}`)
+                                
+
+                        }
+                        
+                    }
+
+
+
+    
+}
+}
 // function main
 function main(){
         // print the manu
@@ -361,7 +409,7 @@ function main(){
                 filter_trip(trips)
                 break;
             case "7":
-                
+                sort_trips(trips)
                 break;
         
             default:
