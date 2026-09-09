@@ -282,7 +282,7 @@ function cancel_tiket(list_tikets,data) {
                      //making sure of the departur of the trip
                             if (data[j].id == list_tikets[i].id) {
                               //udate sites
-                            let y = data[j].availableSeats - 1
+                            let y = data[j].availableSeats + 1
                             data[i].availableSeats = y
                      
                         }
