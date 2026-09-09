@@ -201,6 +201,7 @@ function manu() {
         console.log("5. Search for a ticket")
         console.log("6. Filter trips")
         console.log("7. Sort trips")
+        console.log("0. log out")
 }
 
 
@@ -380,6 +381,8 @@ function sort_trips(data) {
 }
 // function main
 function main(){
+        // value for out from the app
+        let x
         // print the manu
        manu()
            //do loop true
@@ -411,10 +414,13 @@ function main(){
             case "7":
                 sort_trips(trips)
                 break;
+            case "0":
+                x = 0;
+                break;
         
             default:
                 break;
         }
-    }while (true) 
+    }while (x != 0) 
 }
 main()
