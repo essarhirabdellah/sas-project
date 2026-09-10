@@ -186,6 +186,7 @@ const trips = [
     }
 ];
 let tikets = [];
+let empty_place = []
 let id_person = 0;
 
 
@@ -202,6 +203,7 @@ function manu() {
         console.log("5. Search for a ticket")
         console.log("6. Filter trips")
         console.log("7. Sort trips")
+        console.log("8. filter canceled place")
         console.log("0. log out")
 }
 
@@ -221,10 +223,9 @@ function buy(data) {
     //take id of the trep
     let id_trep = Number(prompt("id of trep:"))
     //cenform id 
-     if (id_trep <= 0 ) {
-        console.log("this id does not exset")
-     }
-     else if (id_trep <= data.length) {
+     if (id_trep > 0 ) {
+      
+      if (id_trep <= data.length) {
         // add the id of the terp
         person.id = id_trep
         // take the name
@@ -232,16 +233,24 @@ function buy(data) {
         // add the name
         person.name = name_of_user
         //person id trip
-        person.idtrep = id_person
+        person.idtiket = id_person
         id_person++
         // add it to takites list
         tikets.push(person)
         for (let j = 0; j < data.length; j++) {
         //making sure of the departur of the trip
              if (data[j].id == id_trep) {
+                        if(data[j].availableSeats > 0){
+                             // add place number
+                             person.place = data[j].availableSeats
                               //udate sites
                             let y = data[j].availableSeats - 1
                             data[j].availableSeats = y
+                            console.log("you bought tiket")
+                        }
+                        else{
+                            console.log("the tripe is full sorry")
+                        }
                      
                         }         
                         
@@ -250,6 +259,13 @@ function buy(data) {
     }
 
      }
+      else{
+        console.log("this id of trip does not exest")
+    }
+    }
+    else{
+        console.log("this id of trip does not exest")
+    }
     }
 // show tiket
 
@@ -265,24 +281,31 @@ function show_tiket(list_tikets) {
 function cancel_tiket(list_tikets,data) {
     // // ask for name
     // let name = prompt("name of the castmer:")
+    let check = 0
     // // ask for id of the tiket
     let id = Number(prompt("id of the tiket :"))
     // loop of all tiket we have
     for(let i = 0;i < list_tikets.length;i++){
         // make sure of id
-            if (list_tikets[i].idtrep == id) {
+            if (list_tikets[i].idtiket == id) {
                    let mol = list_tikets[i].id
                    for (let j = 0; j < data.length; j++) {
                      //making sure of the departur of the trip
                             if (data[j].id == mol) {
+                              empty_place.push([mol,list_tikets[i].place])
                               //udate sites
                               let y = data[j].availableSeats + 1
                               data[j].availableSeats = y
+                              check += 1
+                              console.log("this tiket is canceled...")
                      
                         }
                     // delet the object
                     list_tikets.splice(i,1)
             }
+        if (check == 0) {
+            console.log("no tiket with this id")
+        }    
             // if the id does not found
             // else{
             //     console.log("this id does not exsit")
@@ -291,42 +314,28 @@ function cancel_tiket(list_tikets,data) {
 }
 }
 // searsh on tiket 
-function searsh_on_tiket(list_of_tikets,data) {
+function searsh_on_tiket(list_of_tikets) {
+    // check values
+    let check = 0
      // ask for name
     let name = prompt("tiket's person name :")
-    // ask for id of the tiket
-    let id = Number(prompt("id of the tiket :"))
         // loop of all tiket we have
     for(let i = 0;i < list_of_tikets.length;i++){
-        // make sure of id
-            if (list_of_tikets[i].id == id) {
                 // conform the name
                 if (list_of_tikets[i].name == name) {
-                    // delet the object
-                    console.log("this tekit exest the travel is")
-                    //loop on  the trips
-                    for (let i = 0; i < data.length; i++) {
-                        //making sure of the id of the trip
-                        if (data[i].id == id) {
+
                             // show the trip info
-                            for(const [key,value] of Object.entries(data[i])){
+                            for(const [key,value] of Object.entries(list_of_tikets[i])){
                               console.log(`${key} : ${value}`)
                                 
                             }
-                        }
-                        
+                        }       
+                        check+=1
                     }
+    if (check == 0) {
+        console.log("no tiket by this name")
+    }                
                 }
-                else{
-                    console.log(`no tiket with this name ${name}`)
-                }
-            }
-            // if the id does not found
-            // else{
-            //     console.log("this id does not exsit")
-            // }
-    }
-}
 // filter the tripse
 
 function filter_trip(data) {
@@ -395,6 +404,15 @@ function sort_trips(data) {
     
 }
 }
+function search_on_emptyplace(list_of_empty) {
+    let id = prompt("id trep:")
+    for (let i = 0; i < list_of_empty.length; i++) {
+        if (id == list_of_empty[i][0]) {
+            console.log(`${list_of_empty[i][0]} : ${list_of_empty[i][1]}`)
+        }
+        
+    }
+}
 // function main
 function main(){
         // value for out from the app
@@ -421,7 +439,7 @@ function main(){
                 cancel_tiket(tikets,trips)
                 break;
             case "5":
-                searsh_on_tiket(tikets,trips)
+                searsh_on_tiket(tikets)
                 break;
         
             case "6":
@@ -430,6 +448,9 @@ function main(){
             case "7":
                 sort_trips(trips)
                 break;
+            case "8":
+                search_on_emptyplace(empty_place)
+                break;    
             case "0":
                 x = 0;
                 break;
