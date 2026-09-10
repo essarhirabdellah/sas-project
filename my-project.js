@@ -226,23 +226,26 @@ function buy(data) {
      if (id_trep > 0 ) {
       
       if (id_trep <= data.length) {
+        //person id trip
+        person.idtiket = `# ${id_person}`
+        id_person++
         // add the id of the terp
         person.id = id_trep
         // take the name
         let name_of_user = prompt("name :")
         // add the name
         person.name = name_of_user
-        //person id trip
-        person.idtiket = id_person
-        id_person++
         // add it to takites list
-        tikets.push(person)
+        // tikets.push(person)
         for (let j = 0; j < data.length; j++) {
         //making sure of the departur of the trip
              if (data[j].id == id_trep) {
                         if(data[j].availableSeats > 0){
                              // add place number
                              person.place = data[j].availableSeats
+                             person.price = `${data[j].price} DH`
+                             person.route = `${data[j].departure} => ${data[j].destination}`
+                             tikets.push(person)
                               //udate sites
                             let y = data[j].availableSeats - 1
                             data[j].availableSeats = y
@@ -456,7 +459,7 @@ function main(){
                 break;
         
             default:
-                console.log("you have only tasks between 1 ~ 7")
+                console.log("you have only tasks between 1 ~ 8")
                 break;
         }
     }while (x != 0) 
