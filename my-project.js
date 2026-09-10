@@ -408,12 +408,17 @@ function sort_trips(data) {
 }
 }
 function search_on_emptyplace(list_of_empty) {
+    let check = 0
     let id = prompt("id trep:")
     for (let i = 0; i < list_of_empty.length; i++) {
         if (id == list_of_empty[i][0]) {
             console.log(`${list_of_empty[i][0]} : ${list_of_empty[i][1]}`)
+            check+=1
         }
         
+    }
+    if (check == 0) {
+        console.log("no canceled place on this id trip")
     }
 }
 // function main
